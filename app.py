@@ -232,13 +232,14 @@ for i, floor in enumerate(selected_floors):
         marker=dict(size=9, color=status_colors, symbol="circle", line=dict(color="#000000", width=1)),
         hovertemplate=(
             "Date: %{x|%Y-%m-%d}<br>"
-            f"Floor: {floor}<br>"
+            "Floor: " + str(floor) + "<br>"
             "ave: %{y:.4f}<br>"
-            f"min: %{customdata[0]:.4f}<br>"
-            f"max: %{customdata[1]:.4f}<br>"
-            f"stddev: %{customdata[2]:.4f}<br>"
-            f"cnt: %{customdata[3]}<extra></extra>"
+            "min: %{customdata[0]:.4f}<br>"
+            "max: %{customdata[1]:.4f}<br>"
+            "stddev: %{customdata[2]:.4f}<br>"
+            "cnt: %{customdata[3]}<extra></extra>"
         ),
+
         customdata=np.stack([
             pd.to_numeric(s.get("min", np.nan), errors="coerce").fillna(np.nan),
             pd.to_numeric(s.get("max", np.nan), errors="coerce").fillna(np.nan),
@@ -654,3 +655,4 @@ else:
     st.info("No peaks/lows detected for selected settings.")
 
 st.success("Trend analysis ready. Adjust date/floor or sensitivity for different results.")
+
